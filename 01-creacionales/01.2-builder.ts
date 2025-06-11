@@ -39,7 +39,7 @@ import { COLORS } from '../helpers/colors.ts';
 //! Solución
 
 class QueryBuilder {
-  private table: string;
+  private table: string = '*';
   private fields: string[] = [];
   private conditions: string[] = [];
   private orderFields: string[] = [];
@@ -50,19 +50,23 @@ class QueryBuilder {
   }
 
   select(...fields: string[]): QueryBuilder {
-    throw new Error('Method not implemented.');
+    this.fields = fields;
+    return this;
   }
 
   where(condition: string): QueryBuilder {
-    throw new Error('Method not implemented.');
+    this.conditions.push(condition);
+    return this;
   }
 
   orderBy(field: string, direction: 'ASC' | 'DESC' = 'ASC'): QueryBuilder {
-    throw new Error('Method not implemented.');
+    this.orderFields.push(`${field} ${direction}`);
+    return this;
   }
 
   limit(count: number): QueryBuilder {
-    throw new Error('Method not implemented.');
+    this.limitCount = count;
+    return this;
   }
 
   execute(): string {
